@@ -1,4 +1,4 @@
-package com.SpringJavaBased.Config;
+package com.Package.config;
 
 import java.util.Properties;
 
@@ -29,7 +29,7 @@ public class AppContext {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(new String[] {
-            "com.JPA.Entity"
+            "com.JPA.entity"
         });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;

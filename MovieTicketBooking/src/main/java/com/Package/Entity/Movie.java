@@ -24,7 +24,7 @@ public class Movie {
 	private String movie_name;
 	
 	@Column(name = "duration")
-	private int duration;
+	private String duration;
 	
 	@Column(name = "image")
 	private Blob image;
@@ -47,11 +47,11 @@ public class Movie {
 		this.movie_name = movie_name;
 	}
 
-	public int getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(int duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 
@@ -63,12 +63,18 @@ public class Movie {
 		this.image = image;
 	}
 
-	public Movie(int movie_id, String movie_name, int duration, Blob image) {
+	public Movie(int movie_id, String movie_name, String duration, Blob image) {
 		super();
 		this.movie_id = movie_id;
 		this.movie_name = movie_name;
 		this.duration = duration;
 		this.image = image;
 	}
+
+	public Movie() {
+		super();
+	}
+
+	
 
 }

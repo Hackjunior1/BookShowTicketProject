@@ -1,4 +1,4 @@
-package com.SpringJavaBased.Config;
+package com.Package.config;
 
 import org.springframework.context.annotation.Bean;
 
@@ -10,14 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-/**
- * @author Ramesh Fadatare
- */
+
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {
-    "com"
+         " com "// "net.javaguides.springmvc"
 })
 public class WebMvcConfig implements WebMvcConfigurer {
 
@@ -25,7 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public InternalResourceViewResolver resolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setPrefix("/WEB-INF/");
         resolver.setSuffix(".jsp");
         return resolver;
     }
