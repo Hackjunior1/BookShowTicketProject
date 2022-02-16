@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -80,70 +80,61 @@ body {
 }
 
 /* for input form for adding the details of an image class=addform*/
-
 input[type=text], select {
-	
-  width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+	width: 20%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 input[type=submit] {
-  width: 20%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+	width: 20%;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+	background-color: #45a049;
 }
-
 
 /*image button css*/
 .upload-btn-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
 }
 
 .btn {
-	
-  border: 2px solid gray;
-  color: white;
-  background-color: #45a049;
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-
+	border: 2px solid gray;
+	color: white;
+	background-color: #45a049;
+	padding: 8px 20px;
+	border-radius: 8px;
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .upload-btn-wrapper input[type=file] {
-
-  font-size: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
+	font-size: 100px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
 }
-
- 
 
 div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	padding: 20px;
 }
-
 </style>
 
 <script>
@@ -173,36 +164,42 @@ div {
 	</div>
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="#">Add Movies</a> 
-		<a href="#">Remove Movie</a> 
-	
+		<a href="#">Add Movies</a> <a href="#">Remove Movie</a>
+
 	</div>
 
+	<div align="center">
 
+		<form action="saveMovie" method="post" modelAttribute="movie">
 
+			<label for="mname">Movie Name</label>
+			<br />
+			<input type="text" name="moviename" placeholder="Movie Name..." path="name">
+			<br />
+			<label for="language">Language</label>
+			<br />
+			<input type="text" id="language" name="language" placeholder="language..." path="language">
+			<br />
+			<label for="duration">Duration</label>
+			<br />
+			<input type="text" id="duration" name="duration"
+				placeholder="Duration..." path="duration">
+			<br />
+			<label for="castname">Actor's Names</label>
+			<br />
+			<input type="text" id="castname" name="castname"
+				placeholder="Actor's Names..." path="castname">
+			<br />
 
+			<div class="upload-btn-wrapper">
+				<button class="btn">Upload a file</button>
+				<input type="file" name="myfile" />
+			</div>
 
-
-<div align="center">
-  <form action="">
-    <label for="mname">Movie Name</label><br/>
-    <input type="text" id="mname" name="moviename" placeholder="Movie Name...">	<br/>
-    <label for="language">Language</label><br/>
-    <input type="text" id="language" name="language" placeholder="language..."><br/>
-    <label for="duration">Duration</label><br/>
-    <input type="text" id="duration" name="duration" placeholder="Duration..."><br/>
-    <label for="castname">Actor's Names</label><br/>
-    <input type="text" id="castname" name="castname" placeholder="Actor's Names..."><br/> 
-    
-    <div class="upload-btn-wrapper">
-  <button class="btn">Upload a file</button>
-  <input type="file" name="myfile" />
-</div>
-    
-  <br/>
-    <input type="submit" value="Submit">
-  </form>
-</div>
+			<br />
+			<input type="submit" value="Submit">
+		</form>
+	</div>
 
 
 

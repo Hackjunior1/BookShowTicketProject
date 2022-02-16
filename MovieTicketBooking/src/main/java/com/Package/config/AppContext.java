@@ -17,19 +17,23 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@ComponentScan("com.Package.*")//annotation used to scan the source Packages
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 public class AppContext {
 
+	 // The Environment class serves as the property holder
+	 // and stores all the properties loaded by the @PropertySource
     @Autowired
     private Environment environment;
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
+    	System.out.println("inside APPContext inside Session Factory method line 32");
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(new String[] {
-            "com.JPA.entity"
+            "com.Package.Entity"
         });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
@@ -37,6 +41,7 @@ public class AppContext {
 
     @Bean
     public DataSource dataSource() {
+    	System.out.println("inside APPContext inside Session dataSource method line 44");
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
         dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
@@ -46,6 +51,8 @@ public class AppContext {
     }
 
     private Properties hibernateProperties() {
+    	System.out.println("inside APPContext inside Session hibernateProperties method line 54");
+        
         Properties properties = new Properties();
         properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
         properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
@@ -56,6 +63,8 @@ public class AppContext {
 
     @Bean
     public HibernateTransactionManager getTransactionManager() {
+    	System.out.println("inside APPContext inside Session getTransactionManager method line 66");
+        
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;

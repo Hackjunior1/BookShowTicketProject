@@ -5,6 +5,6 @@
 <web-app>
   <display-name>Movie ticket Booking APP</display-name>
   <welcome-file-list>
-  	<welcome-file>admin-login.jsp</welcome-file>
+  	<welcome-file>listofmovies.html</welcome-file>
   </welcome-file-list>
 </web-app>

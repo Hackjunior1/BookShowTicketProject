@@ -18,33 +18,34 @@ public class Movie {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_id")
-	private int movie_id;
+	private int id;
 	
 	@Column(name = "movie_name")
-	private String movie_name;
+	private String name;
 	
 	@Column(name = "duration")
 	private String duration;
 	
 	@Column(name = "image")
-	private Blob image;
+	private String image;
 	
-	
-
-	public int getMovie_id() {
-		return movie_id;
+	@Column(name = "Actors_names")
+	private String cast_names;
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+	public int getId() {
+		return id;
 	}
 
-	public void setMovie_id(int movie_id) {
-		this.movie_id = movie_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getMovie_name() {
-		return movie_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setMovie_name(String movie_name) {
-		this.movie_name = movie_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDuration() {
@@ -55,20 +56,31 @@ public class Movie {
 		this.duration = duration;
 	}
 
-	public Blob getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(Blob image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	
 
-	public Movie(int movie_id, String movie_name, String duration, Blob image) {
+	public String getCast_names() {
+		return cast_names;
+	}
+
+	public void setCast_names(String cast_names) {
+		this.cast_names = cast_names;
+	}
+
+	public Movie(int id, String name, String duration, String image, String cast_names) {
 		super();
-		this.movie_id = movie_id;
-		this.movie_name = movie_name;
+		this.id = id;
+		this.name = name;
 		this.duration = duration;
 		this.image = image;
+		this.cast_names = cast_names;
 	}
 
 	public Movie() {

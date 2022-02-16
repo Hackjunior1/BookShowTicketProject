@@ -14,7 +14,7 @@ public class Seats {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_id")
-	private int seat_id;
+	private int id;
 	
 	@Column(name = "seat_number")
 	private int seat_number;
@@ -41,18 +41,23 @@ public class Seats {
 	}
 
 	public int getSeat_id() {
-		return seat_id;
+		return id;
 	}
 
 	public void setSeat_id(int seat_id) {
-		this.seat_id = seat_id;
+		this.id = seat_id;
 	}
 
 	public Seats(int no_of_seats, int seat_no, int seat_id) {
 		super();
 		this.number_of_seats = no_of_seats;
 		this.seat_number = seat_no;
-		this.seat_id = seat_id;
+		this.id = seat_id;
 	}
+
+	public Seats() {
+		super();
+	}
+	
 
 }
