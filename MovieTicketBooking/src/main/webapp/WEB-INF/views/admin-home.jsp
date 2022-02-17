@@ -170,35 +170,38 @@ div {
 
 	<div align="center">
 
-		<form action="saveMovie" method="post" modelAttribute="movie">
+	
+		<form:form modelAttribute="movie" method="POST" action="saveMovie">
 
-			<label for="mname">Movie Name</label>
+			<label for="name">Movie Name</label>
 			<br />
-			<input type="text" name="moviename" placeholder="Movie Name..." path="name">
+			<!-- <input type="text" name="moviename" placeholder="Movie Name..." path="name"> -->
+			<form:input path="name"  placeholder="Movie Name..."/>
 			<br />
-			<label for="language">Language</label>
+			<label for="Language">Language</label>
 			<br />
-			<input type="text" id="language" name="language" placeholder="language..." path="language">
+			<!-- <input type="text" id="language" name="language" placeholder="language..." path="language"> -->
+			<form:input path="Language"  placeholder="Movie Language..."/>
 			<br />
 			<label for="duration">Duration</label>
 			<br />
-			<input type="text" id="duration" name="duration"
-				placeholder="Duration..." path="duration">
+			<!-- <input type="text" id="duration" name="duration" placeholder="Duration..." path="duration"> -->
+			<form:input path="duration"  placeholder="Movie Duration..."/>
 			<br />
-			<label for="castname">Actor's Names</label>
-			<br />
-			<input type="text" id="castname" name="castname"
-				placeholder="Actor's Names..." path="castname">
+			<label for="cast_names">Actor's Names</label>		<br />
+			<!-- <input type="text" id="castname" name="castname" placeholder="Actor's Names..." path="castname"> -->
+			<form:input path="cast_names"  placeholder="Actor's Names..."/>
 			<br />
 
 			<div class="upload-btn-wrapper">
-				<button class="btn">Upload a file</button>
-				<input type="file" name="myfile" />
+				<form:button class="btn">upload Image</form:button>
+			<%-- 	<form:input type="file" name="Image" /> --%>
+				<form:input type="file" path="image"  placeholder="image"/>
 			</div>
 
 			<br />
 			<input type="submit" value="Submit">
-		</form>
+		</form:form>
 	</div>
 
 

@@ -9,7 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(name = "movie")
 public class Movie {
@@ -31,6 +33,9 @@ public class Movie {
 	
 	@Column(name = "Actors_names")
 	private String cast_names;
+	
+	@Column(name = "language")
+	private String Language;
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 	public int getId() {
 		return id;
@@ -73,14 +78,27 @@ public class Movie {
 	public void setCast_names(String cast_names) {
 		this.cast_names = cast_names;
 	}
+	
+	
 
-	public Movie(int id, String name, String duration, String image, String cast_names) {
+	public String getLanguage() {
+		return Language;
+	}
+
+	public void setLanguage(String language) {
+		Language = language;
+	}
+	
+	
+
+	public Movie(int id, String name, String duration, String image, String cast_names,String language) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.duration = duration;
 		this.image = image;
 		this.cast_names = cast_names;
+		this.Language=language;
 	}
 
 	public Movie() {

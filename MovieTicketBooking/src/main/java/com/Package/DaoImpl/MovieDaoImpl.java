@@ -86,8 +86,9 @@ public class MovieDaoImpl implements MovieDao {
 			
 	        Session currentSession = sessionFactory.getCurrentSession();
 	        currentSession.saveOrUpdate(movie);
-	        System.out.println("current session Details" +currentSession.getSession());
-	        System.out.println("entity Detauls" +movie);
+	        
+	        //System.out.println("current session Details" +currentSession.getSession());
+	        //System.out.println("entity Detauls" +movie);
 	    }
 
 	    @Override

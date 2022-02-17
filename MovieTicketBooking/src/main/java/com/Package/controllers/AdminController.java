@@ -34,308 +34,237 @@ import com.Package.Dao.MovieDao;
 import com.Package.Entity.Movie;
 import com.Package.Entity.ShowMovie;
 
-
 @Controller
 //@SessionAttributes(value = { "ad", "profile" })
 @Transactional
 @Repository
 @EnableWebMvc
-@RequestMapping(value="/movie", method=RequestMethod.GET)
+@RequestMapping(value = "/movie", method = RequestMethod.GET)
 public class AdminController {
 
-	//@Autowired
-	//private DateTime dt;
+	@Autowired
+	private Movie movie;
 
 	@Autowired
 	private MovieDao movieDaoImpl;
-	
-	@Autowired
-    private SessionFactory sessionFactory;
 
-	@RequestMapping(value = "/admin-login")//change login home page name in value attribute.
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	@RequestMapping(value = "/admin-login") // change login home page name in value attribute.
 	public String getAdminLogin() {
 		System.out.println("in get admin Method");
 		return "admin-login";
 	}
 
-	
-   // @Autowired
-   // private CustomerService customerService;
+	// @Autowired
+	// private CustomerService customerService;
 
-    @GetMapping(value="/list")
-    public String listMovies(Model Model) {
-    	System.out.println(" inside Admin Controller inside List method");
-    	
-        List < Movie > movies = movieDaoImpl.getMovie();
-        Model.addAttribute("movies", movies);
-        return "listofmovies";
-    }
-
-    @GetMapping("/showForm")
-    public String showFormForAdd(Model Model) {
-    	System.out.println(" inside Admin Controller inside showForm method");
-    	
-        Movie movies = new Movie();
-        Model.addAttribute("movies", movies);
-        return "admin-home";
-    }
-
-    @RequestMapping(value="/saveMovie", method=RequestMethod.POST)
-    public String saveMovie(@ModelAttribute("movie") Movie movie, ModelMap model,HttpServletRequest request) {
-    	 HttpSession session=request.getSession(); 
-    	 
-    	 String n=request.getParameter("moviename");
-    	session.setAttribute("Mname", n);
-    	
-    	 
-    	System.out.println(" inside Admin Controller inside SaveMovie method before values inserted");
-    	
-    	
-    	ModelMap name=model.addAttribute("Mname", movie.getName());
-    	//ModelMap language=model.addAttribute("language",smovie.getLanguage() );
-    	ModelMap duration=model.addAttribute("duration", movie.getDuration());
-    	ModelMap cast_name=model.addAttribute("castname", movie.getCast_names());
-    	ModelMap image=model.addAttribute("myfile", movie.getImage());
-    	
-    	
-    	System.out.println("name getting by request object =" +n);
-    	
-    
-    	
-    	System.out.println("name ="+toString(name));
-    	//System.out.println("language=" +toString(language));
-    	System.out.println("duration = "+toString(duration));
-    	System.out.println("cast_names= "+toString(cast_name));
-    	System.out.println("image= "+toString(image));
-    	
-    	movieDaoImpl.saveMovie(movie);
-    	
-    	return "listofmovies";
-    	/*try {
-			
-			System.out.println("inside adminControlloer class inside insert method in try block");
-			
-			Session session = sessionFactory.getCurrentSession();
-			Transaction t = session.beginTransaction();
-			session.save(movie);
-			t.commit();
-			session.close();
-			System.out.println(" inside Admin Controller inside SaveMovie method after values inserted.");
-			
-
-		} catch (Exception e) {
-
-			System.out.println("inside Catch in Admin Controller");
-			System.out.println("Exception(ADD): " + e);
-			//return false;
-
-		}
-    	return "listofmovies";*/
-    	
-    	//System.out.println(" inside Admin Controller inside SaveMovie method after values inserted redirecting to List.");
-    	
-       //return "redirect:/movie/list";
-    }
-
-    private String toString(ModelMap name) {
-		// TODO Auto-generated method stub
-		return null;
+	@GetMapping(value = "/list")
+	public String listMovies(Model Model) {
+		System.out.println(" inside Admin Controller inside List method");
+		List<Movie> movies = movieDaoImpl.getMovie();
+		Model.addAttribute("movies", movies);
+		return "listofmovies";
 	}
 
+	@GetMapping("/showForm")
+	public String showFormForAdd(Model Model) {
+		System.out.println(" inside Admin Controller inside showForm method");
+		Model.addAttribute("movie", new Movie());
+
+		return "admin-home";
+	}
+
+	@RequestMapping(value = "/saveMovie", method = RequestMethod.POST)
+	public String saveMovie(@ModelAttribute("movie") Movie movie, Model model) {
+
+		System.out.println(" inside Admin Controller inside SaveMovie method before values inserted line 88");
+		/*
+		 * System.out.println("name =" + movie.getName());
+		 * System.out.println("Language =" + movie.getLanguage());
+		 * System.out.println("Duration =" + movie.getDuration());
+		 * System.out.println("Cast's Names =" + movie.getCast_names());
+		 * System.out.println("Image =" + movie.getImage());
+		 */
+		model.addAttribute("name", movie.getName());
+		model.addAttribute("language", movie.getLanguage());
+		model.addAttribute("duration", movie.getDuration());
+		model.addAttribute("castname", movie.getCast_names());
+		model.addAttribute("myfile", movie.getImage());
+
+		movieDaoImpl.saveMovie(movie);
+
+		System.out.println(" inside Admin Controller inside SaveMovie method before values inserted line 109");
+
+		System.out.println("name =" + movie.getName());
+		System.out.println("Language =" + movie.getLanguage());
+		System.out.println("Duration =" + movie.getDuration());
+		System.out.println("Cast's Names =" + movie.getCast_names());
+		System.out.println("Image =" + movie.getImage());
+
+		return "listofmovies";
+		/*
+		 * try {
+		 * 
+		 * System.out.
+		 * println("inside adminControlloer class inside insert method in try block");
+		 * 
+		 * Session session = sessionFactory.getCurrentSession(); Transaction t =
+		 * session.beginTransaction(); session.save(movie); t.commit(); session.close();
+		 * System.out.
+		 * println(" inside Admin Controller inside SaveMovie method after values inserted."
+		 * );
+		 * 
+		 * 
+		 * } catch (Exception e) {
+		 * 
+		 * System.out.println("inside Catch in Admin Controller");
+		 * System.out.println("Exception(ADD): " + e); //return false;
+		 * 
+		 * } return "listofmovies";
+		 */
+
+		// System.out.println(" inside Admin Controller inside SaveMovie method after
+		// values inserted redirecting to List.");
+
+		// return "redirect:/movie/list";
+	}
 
 	@GetMapping("/updateMovie")
-    public String showFormForUpdate(@RequestParam("movieId") int movie_id, Model Model) {
-    	System.out.println(" inside Admin Controller inside updateMovie method");
-    	
-        Movie movie = movieDaoImpl.getMovie(movie_id);
-        Model.addAttribute("movie", movie);
-        return "AdminHomepage";
-    }
+	public String showFormForUpdate(@RequestParam("movieId") int movie_id, Model Model) {
+		System.out.println(" inside Admin Controller inside updateMovie method");
 
-    @GetMapping("/delete")
-    public String deleteMovie(@RequestParam("movieId") int movie_id) {
-    	System.out.println(" inside Admin Controller inside deleteMovie method");
-    	
-    	movieDaoImpl.deleteMovie(movie_id);
-        return "redirect:/movie/list";
-    }
-    
-    @RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
-    public ModelAndView upload(@RequestParam("file") CommonsMultipartFile file, @RequestParam String image,
-    		HttpSession session, HttpServletRequest request) {
-    	System.out.println(" inside Admin Controller inside imageupdate method");
-    	
-
-    	String path = session.getServletContext().getRealPath("/resources/img/movies/");
-
-    	// String fileName=file.getOriginalFilename();
-
-    	
-    	  Integer movie_id = Integer.parseInt(image);  //Long.parseLong(image); 
-    	  Movie movie = movieDaoImpl.getMovie(movie_id);
-    	  movie.setImage(image);
-    	  String fileName = image;
-    	 
-    	//Blob fileName = Hibernate.createBlob(file.getInputStream());
-
-    	System.out.println(path);
-
-    	try {
-    		
-    		File f = new File(path + fileName + ".jpg");
-    		if (f.exists()) {
-    			boolean res = f.delete();
-    			if (res) {
-    				System.out.println("Deleted");
-    			}
-    			byte img[] = file.getBytes();
-    			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(path + fileName + ".jpg"));
-    			out.write(img);
-    			out.flush();
-    			out.close();
-    			movieDaoImpl.update(movie);
-    		} else {
-    			byte img[] = file.getBytes();
-    			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(path + fileName + ".jpg"));
-    			out.write(img);
-    			out.flush();
-    			out.close();
-    			movieDaoImpl.update(movie);
-    		}
-
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    	}
-    	ModelAndView m = new ModelAndView("redirect:/movie/AdminHomepage");
-    	return m;
-
-    }
-    
-    @RequestMapping("/logout")
-    public ModelAndView getLogout() {
-    	ModelAndView m = new ModelAndView("/admin");
-    	return m;
-    }
-    
-    
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/*@RequestMapping(value = ("/admin/manage-movies"), method = RequestMethod.GET)
-public ModelAndView getManageMovies(@ModelAttribute("movie") Movie movie, Map<String, Object> model) {
-	List<Movie> list = mi.getAllMovies();
-	List<String> l = new ArrayList<String>();
-	l.add("Language");
-	l.add("Hindi");
-	l.add("English");
-	l.add("Punjabi");
-	l.add("Telugu");
-	ModelAndView m = new ModelAndView("manage-movies");
-	return m;
-}
-
-@RequestMapping(value = ("/admin/registerMovie"), method = RequestMethod.POST)
-public ModelAndView registerMovie(Movie movie) {
-	boolean res = mi.insert(movie);
-	ModelAndView m = new ModelAndView("redirect:/admin/manage-movies");
-	if (res == true) {
-		m.addObject("msg", "added");
-	} else {
-		m.addObject("msg", "Cannot add movie re-submit");
+		Movie movie = movieDaoImpl.getMovie(movie_id);
+		Model.addAttribute("movie", movie);
+		return "AdminHomepage";
 	}
-	return m;
-}
 
-@RequestMapping(value = ("/admin/updateMovie"), method = RequestMethod.POST)
-public ModelAndView updateMovie(Movie mov) {
-	mi.update(mov);
-	return new ModelAndView("redirect:/admin/manage-movies");
-}
+	@GetMapping("/delete")
+	public String deleteMovie(@RequestParam("movieId") int movie_id) {
+		System.out.println(" inside Admin Controller inside deleteMovie method");
 
-@RequestMapping(value = ("/admin/deleteMovie/{id}"), method = RequestMethod.GET)
-public ModelAndView deleteMovie(@PathVariable("id") long id) {
-	mi.delete(id);
-	return new ModelAndView("redirect:/admin/manage-movies");
-}
+		movieDaoImpl.deleteMovie(movie_id);
+		return "redirect:/movie/list";
+	}
 
-@RequestMapping("/admin/manage-movies")
-public ModelAndView getManageCinemas(@ModelAttribute("cinema") Movie movie, Map<String, Object> model) {
-	List<Movie> list = mi.getAllMovies();
-	List<String> l = new ArrayList<String>();
-	l.add("PVR");
-	ModelAndView m = new ModelAndView("manage-cinemas");
-	return m;
-}
+	/*
+	 * @RequestMapping(value = "/admin/upload", method = RequestMethod.POST) public
+	 * ModelAndView upload(@RequestParam("file") CommonsMultipartFile
+	 * file, @RequestParam String image, HttpSession session, HttpServletRequest
+	 * request) {
+	 * System.out.println(" inside Admin Controller inside imageupdate method");
+	 * 
+	 * String path =
+	 * session.getServletContext().getRealPath("/resources/img/movies/");
+	 * 
+	 * // String fileName=file.getOriginalFilename();
+	 * 
+	 * Integer movie_id = Integer.parseInt(image); // Long.parseLong(image); Movie
+	 * movie = movieDaoImpl.getMovie(movie_id); movie.setImage(image); String
+	 * fileName = image;
+	 * 
+	 * // Blob fileName = Hibernate.createBlob(file.getInputStream());
+	 * 
+	 * System.out.println(path);
+	 * 
+	 * try {
+	 * 
+	 * File f = new File(path + fileName + ".jpg"); if (f.exists()) { boolean res =
+	 * f.delete(); if (res) { System.out.println("Deleted"); } byte img[] =
+	 * file.getBytes(); BufferedOutputStream out = new BufferedOutputStream(new
+	 * FileOutputStream(path + fileName + ".jpg")); out.write(img); out.flush();
+	 * out.close(); movieDaoImpl.update(movie); } else { byte img[] =
+	 * file.getBytes(); BufferedOutputStream out = new BufferedOutputStream(new
+	 * FileOutputStream(path + fileName + ".jpg")); out.write(img); out.flush();
+	 * out.close(); movieDaoImpl.update(movie); }
+	 * 
+	 * } catch (Exception e) { e.printStackTrace(); } ModelAndView m = new
+	 * ModelAndView("redirect:/movie/AdminHomepage"); return m;
+	 * 
+	 * }
+	 */
 
-@RequestMapping("/logout")
-public ModelAndView getLogout() {
-	ModelAndView m = new ModelAndView("/admin");
-	return m;
+	@RequestMapping("/logout")
+	public ModelAndView getLogout() {
+		ModelAndView m = new ModelAndView("/admin");
+		return m;
+	}
+
 }
 
 /*
+ * @RequestMapping(value = ("/admin/manage-movies"), method = RequestMethod.GET)
+ * public ModelAndView getManageMovies(@ModelAttribute("movie") Movie movie,
+ * Map<String, Object> model) { List<Movie> list = mi.getAllMovies();
+ * List<String> l = new ArrayList<String>(); l.add("Language"); l.add("Hindi");
+ * l.add("English"); l.add("Punjabi"); l.add("Telugu"); ModelAndView m = new
+ * ModelAndView("manage-movies"); return m; }
+ * 
+ * @RequestMapping(value = ("/admin/registerMovie"), method =
+ * RequestMethod.POST) public ModelAndView registerMovie(Movie movie) { boolean
+ * res = mi.insert(movie); ModelAndView m = new
+ * ModelAndView("redirect:/admin/manage-movies"); if (res == true) {
+ * m.addObject("msg", "added"); } else { m.addObject("msg",
+ * "Cannot add movie re-submit"); } return m; }
+ * 
+ * @RequestMapping(value = ("/admin/updateMovie"), method = RequestMethod.POST)
+ * public ModelAndView updateMovie(Movie mov) { mi.update(mov); return new
+ * ModelAndView("redirect:/admin/manage-movies"); }
+ * 
+ * @RequestMapping(value = ("/admin/deleteMovie/{id}"), method =
+ * RequestMethod.GET) public ModelAndView deleteMovie(@PathVariable("id") long
+ * id) { mi.delete(id); return new
+ * ModelAndView("redirect:/admin/manage-movies"); }
+ * 
+ * @RequestMapping("/admin/manage-movies") public ModelAndView
+ * getManageCinemas(@ModelAttribute("cinema") Movie movie, Map<String, Object>
+ * model) { List<Movie> list = mi.getAllMovies(); List<String> l = new
+ * ArrayList<String>(); l.add("PVR"); ModelAndView m = new
+ * ModelAndView("manage-cinemas"); return m; }
+ * 
+ * @RequestMapping("/logout") public ModelAndView getLogout() { ModelAndView m =
+ * new ModelAndView("/admin"); return m; }
+ * 
+ * /*
+ * 
  * @RequestMapping(value = "/admin/add", method = RequestMethod.GET) public
  * ModelAndView addAdmin(@ModelAttribute("admin") Admin admin) { ModelAndView m
  * = new ModelAndView("admin-registration"); return m; }
  */
 
-
-/*@RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
-public ModelAndView upload(@RequestParam("file") CommonsMultipartFile file, @RequestParam String image,
-		HttpSession session, HttpServletRequest request) {
-
-	String path = session.getServletContext().getRealPath("/resources/img/movies/");
-
-	// String fileName=file.getOriginalFilename();
-
-	
-	  Long id = Long.parseLong(image); 
-	  Movie movie = mi.getMovieById(id);
-	  movie.setImage(image);
-	  String fileName = image;
-	 
-	//Blob fileName = Hibernate.createBlob(file.getInputStream());
-
-	System.out.println(path);
-
-	try {
-		
-		File f = new File(path + fileName + ".jpg");
-		if (f.exists()) {
-			boolean res = f.delete();
-			if (res) {
-				System.out.println("Deleted");
-			}
-			byte img[] = file.getBytes();
-			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(path + fileName + ".jpg"));
-			out.write(img);
-			out.flush();
-			out.close();
-			mi.update(movie);
-		} else {
-			byte img[] = file.getBytes();
-			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(path + fileName + ".jpg"));
-			out.write(img);
-			out.flush();
-			out.close();
-			mi.update(movie);
-		}
-
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-	ModelAndView m = new ModelAndView("redirect:/admin/manage-movies");
-	return m;
-
-}*/
+/*
+ * @RequestMapping(value = "/admin/upload", method = RequestMethod.POST) public
+ * ModelAndView upload(@RequestParam("file") CommonsMultipartFile
+ * file, @RequestParam String image, HttpSession session, HttpServletRequest
+ * request) {
+ * 
+ * String path =
+ * session.getServletContext().getRealPath("/resources/img/movies/");
+ * 
+ * // String fileName=file.getOriginalFilename();
+ * 
+ * 
+ * Long id = Long.parseLong(image); Movie movie = mi.getMovieById(id);
+ * movie.setImage(image); String fileName = image;
+ * 
+ * //Blob fileName = Hibernate.createBlob(file.getInputStream());
+ * 
+ * System.out.println(path);
+ * 
+ * try {
+ * 
+ * File f = new File(path + fileName + ".jpg"); if (f.exists()) { boolean res =
+ * f.delete(); if (res) { System.out.println("Deleted"); } byte img[] =
+ * file.getBytes(); BufferedOutputStream out = new BufferedOutputStream(new
+ * FileOutputStream(path + fileName + ".jpg")); out.write(img); out.flush();
+ * out.close(); mi.update(movie); } else { byte img[] = file.getBytes();
+ * BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(path
+ * + fileName + ".jpg")); out.write(img); out.flush(); out.close();
+ * mi.update(movie); }
+ * 
+ * } catch (Exception e) { e.printStackTrace(); } ModelAndView m = new
+ * ModelAndView("redirect:/admin/manage-movies"); return m;
+ * 
+ * }
+ */
