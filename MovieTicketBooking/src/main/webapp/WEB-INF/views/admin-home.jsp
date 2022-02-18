@@ -169,8 +169,6 @@ div {
 	</div>
 
 	<div align="center">
-
-	
 		<form:form modelAttribute="movie" method="POST" action="saveMovie">
 
 			<label for="name">Movie Name</label>

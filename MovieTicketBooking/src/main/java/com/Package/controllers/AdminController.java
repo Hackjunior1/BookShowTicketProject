@@ -43,13 +43,8 @@ import com.Package.Entity.ShowMovie;
 public class AdminController {
 
 	@Autowired
-	private Movie movie;
-
-	@Autowired
 	private MovieDao movieDaoImpl;
 
-	@Autowired
-	private SessionFactory sessionFactory;
 
 	@RequestMapping(value = "/admin-login") // change login home page name in value attribute.
 	public String getAdminLogin() {
@@ -57,15 +52,13 @@ public class AdminController {
 		return "admin-login";
 	}
 
-	// @Autowired
-	// private CustomerService customerService;
-
-	@GetMapping(value = "/list")
+	@GetMapping(value = "/listmovies")
 	public String listMovies(Model Model) {
 		System.out.println(" inside Admin Controller inside List method");
+		
 		List<Movie> movies = movieDaoImpl.getMovie();
 		Model.addAttribute("movies", movies);
-		return "listofmovies";
+		return "listmovies";
 	}
 
 	@GetMapping("/showForm")
@@ -104,31 +97,6 @@ public class AdminController {
 		System.out.println("Image =" + movie.getImage());
 
 		return "listofmovies";
-		/*
-		 * try {
-		 * 
-		 * System.out.
-		 * println("inside adminControlloer class inside insert method in try block");
-		 * 
-		 * Session session = sessionFactory.getCurrentSession(); Transaction t =
-		 * session.beginTransaction(); session.save(movie); t.commit(); session.close();
-		 * System.out.
-		 * println(" inside Admin Controller inside SaveMovie method after values inserted."
-		 * );
-		 * 
-		 * 
-		 * } catch (Exception e) {
-		 * 
-		 * System.out.println("inside Catch in Admin Controller");
-		 * System.out.println("Exception(ADD): " + e); //return false;
-		 * 
-		 * } return "listofmovies";
-		 */
-
-		// System.out.println(" inside Admin Controller inside SaveMovie method after
-		// values inserted redirecting to List.");
-
-		// return "redirect:/movie/list";
 	}
 
 	@GetMapping("/updateMovie")
