@@ -9,15 +9,7 @@ import com.Package.Entity.Movie;
 @Service
 public interface MovieDao{
 	
-	/*public boolean insert(Movie movie);
 	
-	public List<Movie> getAllMovies();
-	
-	public boolean delete(long movie_id);
-	
-	public boolean update(Movie movie);
-	
-	public Movie getMovieById(long movie_id);*/
 	
 		//public boolean insert(Movie movie);
 	
@@ -29,5 +21,7 @@ public interface MovieDao{
 
 	    public void deleteMovie(int movie_id);
 	    
-	    public boolean update(Movie movie);
+	   // public boolean update(Movie movie);
+
+		//public ResponseEntity<Movie> getMovie(Integer movie_id, @Valid Movie movie);
 }

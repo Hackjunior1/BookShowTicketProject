@@ -24,11 +24,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_321">
-		<attributes>
-			<attribute name="owner.project.facets" value="java"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="D:/Suresh/JAR&apos;s/hibernate jar files/hibernate-search-5.8.0.Final/dist/hibernate-search-engine-5.8.0.Final.jar"/>
 	<classpathentry kind="lib" path="D:/Suresh/JAR&apos;s/hibernate jar files/hibernate-search-5.8.0.Final/dist/hibernate-search-orm-5.8.0.Final.jar"/>
 	<classpathentry kind="lib" path="D:/Suresh/JAR&apos;s/hibernate jar files/hibernate-search-5.8.0.Final/dist/lib/required/antlr-2.7.7.jar"/>
@@ -200,5 +195,15 @@
 	<classpathentry kind="lib" path="D:/Suresh/JAR&apos;s/asm-all-2.2.3 (1).jar"/>
 	<classpathentry kind="lib" path="D:/Suresh/JAR&apos;s/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="D:/Suresh/JAR&apos;s/aspectj-weaver.jar"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_321">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
