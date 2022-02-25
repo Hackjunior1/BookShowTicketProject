@@ -77,25 +77,26 @@ public class AdminController {
 	//@RequestMapping(value = "/saveMovie", method = RequestMethod.POST)
 	
 	@PostMapping("/saveMovie")
-	public String saveMovie(@ModelAttribute("movie") Movie movie)  throws IOException{
+	public String saveMovie(@ModelAttribute("movie") Movie movie,Model model)  throws IOException{
 
 		System.out.println(" inside Admin Controller inside SaveMovie method before values inserted line 88");
 		
-	
+
+		model.addAttribute("myfile", movie.getImage());
 		movieDaoImpl.saveMovie(movie);
-		
+		System.out.println("Image =" + movie.getImage());
 		/*model.addAttribute("name", movie.getName());
 		model.addAttribute("language", movie.getLanguage());
 		model.addAttribute("duration", movie.getDuration());
 		model.addAttribute("castname", movie.getCast_names());
-		model.addAttribute("myfile", movie.getImage());*/
+		*/
 		//System.out.println(" inside Admin Controller inside SaveMovie method before values inserted line 109");
 
 		/*System.out.println("name =" + movie.getName());
 		System.out.println("Language =" + movie.getLanguage());
 		System.out.println("Duration =" + movie.getDuration());
 		System.out.println("Cast's Names =" + movie.getCast_names());
-		System.out.println("Image =" + movie.getImage());*/
+		*/
 
 		return "redirect:/movie/Listmovies";
 	}

@@ -111,6 +111,7 @@ body {
 	position: relative;
 	overflow: hidden;
 	display: inline-block;
+
 }
 
 .btn {
@@ -121,6 +122,7 @@ body {
 	border-radius: 8px;
 	font-size: 20px;
 	font-weight: bold;
+	
 }
 
 .upload-btn-wrapper input[type=file] {
@@ -129,6 +131,8 @@ body {
 	left: 0;
 	top: 0;
 	opacity: 0;
+	cursor: pointer;
+	
 }
 
 div {
@@ -206,13 +210,13 @@ div {
 			<div class="form-group">
 				<label for="" class="col-md-3 control-label">Movie Start Date</label>
 				<div class="">
-					<form:input path="MovieStartDate"/>
+					<form:input path="MovieStartDate" placeholder="Enter show starting date"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="" class="col-md-3 control-label">Movie End Date</label>
 				<div class="">
-					<form:input path="MovieEndDate"/>
+					<form:input path="MovieEndDate" placeholder="Enter show End date"/>
 				</div>
 			</div>
 
@@ -221,7 +225,7 @@ div {
 			<div class="upload-btn-wrapper">
 				<form:button class="btn">upload Image</form:button>
 
-				<form:input type="file" path="image" placeholder="image" />
+				<form:input type="file" path="image"  />
 			</div>
 
 			<div class="form-group">

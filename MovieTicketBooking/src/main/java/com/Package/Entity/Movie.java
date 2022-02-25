@@ -35,8 +35,8 @@ public class Movie {
 	@Column(name = "duration")
 	private String duration;
 	
-
-	@Column(name = "image")
+	@Lob
+	@Column(name = "image",columnDefinition="BLOB")
 	private byte[] image;
 	
 	private String base64Image;
@@ -112,6 +112,10 @@ public class Movie {
 
 	public byte[] getImage() {
 		return image;
+	}
+	
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	public String getCast_names() {

@@ -49,7 +49,7 @@
 							<tr>
 
 								<td>
-									 <img src="data:image/jpeg;base64,${Movies.image}" width="100" height="100" /> 
+									 <img src="data:image/jpg;base64,${Movies.image}" width="100" height="100" /> 
 									<%-- <img src="data:;base64,${Movies.image}" width="100" height="100" /> --%>
 
 								</td>
