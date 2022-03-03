@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.Package.Entity.Movie;
-
+import com.Package.Entity.ShowMovie;
+import com.Package.Entity.CompositeModelDto;
 @Service
 public interface MovieDao{
 	
@@ -15,7 +16,7 @@ public interface MovieDao{
 	
 	   public List < Movie > getMovie();
 
-	    public void saveMovie(Movie movie);
+	    public void saveMovie(Movie movie, ShowMovie showmovie);
 
 	    public Movie getMovie(int movie_id);
 

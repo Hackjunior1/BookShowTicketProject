@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.Package.Dao.MovieDao;
 import com.Package.Entity.Movie;
+import com.Package.Entity.ShowMovie;
 
 @Transactional
 @Repository
@@ -53,13 +54,13 @@ public class MovieDaoImpl implements MovieDao {
 	}
 
 	@Override
-	public void saveMovie(Movie movie) {
+	public void saveMovie(Movie movie, ShowMovie showmovie) {
 		System.out.println("inside MoviedaoImpl class inside save movie method line 85");
 
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		currentSession.saveOrUpdate(movie);
-
+		currentSession.saveOrUpdate(showmovie);
 		// System.out.println("current session Details" +currentSession.getSession());
 		// System.out.println("entity Detauls" +movie);
 	}

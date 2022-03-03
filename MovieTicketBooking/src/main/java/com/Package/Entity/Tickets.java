@@ -11,22 +11,22 @@ import javax.persistence.Table;
 @Table(name = "tickets")
 public class Tickets {
 
-	
-	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ticket_number")
-	private int ticket_number;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ticket_number")
+	private int ticket_number;//
+
 	@Column(name = "show_id")
-	private int show_id;
-	
+	private int show_id;//
+
 	@Column(name = "show_date")
-	private int show_date;
-	
+	private int show_date;//
+
 	@Column(name = "seat_number")
-	private int seat_number;
-	//private double price;
+	private int seat_number;// has to come from seats table at the time of booking.
+
+	@Column(name = "Ticket_price")
+	private int price;// has to come from movie table.
 
 	public int getShow_id() {
 		return show_id;
@@ -60,24 +60,25 @@ public class Tickets {
 		this.seat_number = seat_no;
 	}
 
-	/*
-	 * public double getPrice() { return price; }
-	 * 
-	 * public void setPrice(double price) { this.price = price; }
-	 */
-	public Tickets(int show_id, int show_date, int ticket_no, int seat_no, double price) {
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public Tickets(int show_id, int show_date, int ticket_no, int seat_no, int price) {
 		super();
 		this.show_id = show_id;
 		this.show_date = show_date;
 		this.ticket_number = ticket_no;
 		this.seat_number = seat_no;
-		//this.price = price;
+		this.price = price;
 	}
 
 	public Tickets() {
-		super();
+		
 	}
-
-	
 
 }

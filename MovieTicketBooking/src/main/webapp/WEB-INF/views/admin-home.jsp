@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -12,7 +13,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	transition: background-color .5s;
 }
-/* <!-- Top nav bar styles --> */
+/* <!-- Top nav bar styles -- */
 .navbar {
 	width: 100%;
 	background-color: orange;
@@ -21,7 +22,7 @@ body {
 
 .navbar a {
 	float: right;
-	padding: 12px;
+	padding: 20px;
 	color: white;
 	text-decoration: none;
 	font-size: 17px;
@@ -31,7 +32,7 @@ body {
 	background-color: silver;
 }
 
-/* <!-- side nav bar styles --> */
+/* <!-- side nav bar styles -- */
 .sidenav {
 	height: 100%;
 	width: 0;
@@ -107,38 +108,30 @@ body {
 }
 
 /*image button css*/
-.upload-btn-wrapper {
+.choose_file {
 	position: relative;
-	overflow: hidden;
 	display: inline-block;
-
-}
-
-.btn {
-	border: 2px solid gray;
-	color: white;
-	background-color: #45a049;
-	padding: 8px 20px;
 	border-radius: 8px;
-	font-size: 20px;
-	font-weight: bold;
-	
+	border: #ebebeb solid 1px;
+	width: 250px;
+	height: 25px;
+	padding: 8px 6px 4px 8px; /* padding values= top right bottom left.*/
+	font : normal 14px Myriad Pro, Verdana, Geneva, sans-serif; color :
+	white;
+	margin-top: 2px;
+	background: green;
+	font: normal 14px Myriad Pro, Verdana, Geneva, sans-serif;
+	color: white;
+	cursor: pointer;
 }
 
-.upload-btn-wrapper input[type=file] {
-	font-size: 100px;
+.choose_file input[type="file"] {
+	-webkit-appearance: none;
 	position: absolute;
-	left: 0;
 	top: 0;
+	left: 0;
 	opacity: 0;
 	cursor: pointer;
-	
-}
-
-div {
-	border-radius: 5px;
-	background-color: #f2f2f2;
-	padding: 20px;
 }
 </style>
 
@@ -172,105 +165,91 @@ div {
 		<a href="#">Add Movies</a> <a href="#">Remove Movie</a>
 
 	</div>
-
+	
 	<div align="center">
-		<form:form modelAttribute="movie" method="POST" action="saveMovie">
-
-			<!-- need to associate this data with customer id -->
-			<form:hidden path="id" />
-
+		<form:form modelAttribute="movieDto" method="POST" action="saveMovie">
+			<!-- need to associate this data with customer id 
+			-->
 			<div class="form-group">
 				<label class="col-md-3 control-label">Movie Name</label>
 				<div class="">
-					<form:input path="name" placeholder="Movie Name..." />
+					<form:input path="movie.name" placeholder="Movie Name..." />
 				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="col-md-3 control-label">Language</label>
-				<div class="">
-					<form:input path="Language" placeholder="Movie Language..." />
-				</div>
-			</div>
-
+			 </div>
 			<div class="form-group">
 				<label class="col-md-3 control-label">Duration</label>
 				<div class="">
-					<form:input path="duration" placeholder="Movie Duration..." />
+					<form:input path="movie.duration" placeholder="Movie Duration..." />
 				</div>
 			</div>
-
 			<div class="form-group">
 				<label for="" class="col-md-3 control-label">Actor's Names</label>
 				<div class="">
-					<form:input path="cast_names" placeholder="Actor's Names..." />
+					<form:input path="movie.cast_names" placeholder="Actor's Names..." />
 				</div>
 			</div>
-
 			<div class="form-group">
-				<label for="" class="col-md-3 control-label">Movie Start Date</label>
+				<label for="" class="col-md-3 control-label">Movie Start
+					Date</label>
 				<div class="">
-					<form:input path="MovieStartDate" placeholder="Enter show starting date"/>
+					<form:input path="movie.MovieStartDate"	placeholder="Enter show starting date" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="" class="col-md-3 control-label">Movie End Date</label>
 				<div class="">
-					<form:input path="MovieEndDate" placeholder="Enter show End date"/>
+					<form:input path="movie.MovieEndDate" placeholder="Enter show End date" />
 				</div>
 			</div>
 
-		
+			<div class="form-group">
+				<label for="" class="col-md-3 control-label">Ticket Price</label>
+				<div class="">
+					<form:input path="movie.price" placeholder="Enter Ticket Price" />
+				</div>
+			</div>
+			
+				
+					<div class="form-group">
+						<label class="col-md-3 control-label">Language</label>
+						<div class="">
+							<form:input path="showmovie.language" placeholder="Movie Language..." />
+						</div>
+					</div>
 
-			<div class="upload-btn-wrapper">
-				<form:button class="btn">upload Image</form:button>
+					<div class="form-group">
+						<label for="" class="col-md-3 control-label">Show Time</label>
+						<div class="">
+							<form:input path="showmovie.Show_Time" placeholder="Enter Show Timing" />
+						</div>
+					</div>
 
-				<form:input type="file" path="image"  />
+					<div class="form-group">
+						<label for="" class="col-md-3 control-label">Show Start
+							Time</label>
+						<div class="">
+							<form:input path="showmovie.Start_Time" placeholder="Enter Show Start Time" />
+						</div>
+					</div>
+				 
+
+
+			<div class="choose_file">
+				<span>Select Image </span> 
+				<input name="Select File" type="file" path="movie.image" />
 			</div>
 
 			<div class="form-group">
 				<!-- Button -->
 				<div class="col-md-offset-3 col-md-9">
-					<form:button cssClass="btn btn-primary">Submit</form:button>
+					<%-- <form:button cssClass="btn btn-primary">Submit</form:button> --%>
+					<input type="submit" value="submit"/>
 				</div>
 			</div>
-
-			<%-- <label for="name">Movie Name</label>
-			<br />
-			<!-- <input type="text" name="moviename" placeholder="Movie Name..." path="name"> -->
-			<form:input path="name"  placeholder="Movie Name..."/>
-			<br />
-			<label for="Language">Language</label>
-			<br />
-			<!-- <input type="text" id="language" name="language" placeholder="language..." path="language"> -->
-			<form:input path="Language"  placeholder="Movie Language..."/>
-			<br />
-			<label for="duration">Duration</label>
-			<br />
-			<!-- <input type="text" id="duration" name="duration" placeholder="Duration..." path="duration"> -->
-			<form:input path="duration"  placeholder="Movie Duration..."/>
-			<br />
-			<label for="cast_names">Actor's Names</label>		<br />
-			<!-- <input type="text" id="castname" name="castname" placeholder="Actor's Names..." path="castname"> -->
-			<form:input path="cast_names"  placeholder="Actor's Names..."/>
-			<br />
-
-			<div class="upload-btn-wrapper">
-				<form:button class="btn">upload Image</form:button>
-			<%-- 	<form:input type="file" name="Image" /> --%
-				<form:input type="file" path="image"  placeholder="image"/>
-			</div>
-
-			<br />
-			<input type="submit" value="Submit">--%>
-
 		</form:form>
-
-
 	</div>
 
-
-
-
-</body>
+	
+	
+	</body>
 </html>

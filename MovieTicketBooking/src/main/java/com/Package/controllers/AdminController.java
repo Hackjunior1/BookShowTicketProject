@@ -2,13 +2,13 @@ package com.Package.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import java.util.Date;
 import java.util.List;
+
 import javax.transaction.Transactional;
 
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -22,20 +22,23 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.Package.Dao.MovieDao;
+import com.Package.Entity.CompositeModelDto;
 import com.Package.Entity.Movie;
+import com.Package.Entity.ShowMovie;
 
 @Controller
 @Transactional
 @Repository
 @EnableWebMvc
-@RequestMapping(value = "/movie", method = RequestMethod.GET)
+@Scope("singleton")
+//@RequestMapping(value = "/movie", method = RequestMethod.GET)
 public class AdminController {
 
 	@Autowired
 	private MovieDao movieDaoImpl;
-	
-	private ModelAndView mav;
-	
+
+	// private ModelAndView mav;
+
 	@RequestMapping(value = "/admin-login") // change login home page name in value attribute.
 	public String getAdminLogin() {
 		System.out.println("in get admin Method");
@@ -43,87 +46,88 @@ public class AdminController {
 	}
 
 	@GetMapping(value = "/Listmovies")
-	public String listMovies(Model Model,Movie movie) throws SQLException, IOException {
+	public String listMovies(Model Model, Movie movie) throws SQLException, IOException {
 		System.out.println(" inside Admin Controller inside List method line 53");
-		
+
 		List<Movie> movies = movieDaoImpl.getMovie();
-		
-		
-		/*
-		 * byte[] encodeBase64 = Base64.encode(movie.getImage()); String base64Encoded =
-		 * new String(encodeBase64, "UTF-8"); mav.addObject("image", base64Encoded );
-		 */
-	    
+
 		System.out.println("flow came back to Admin controller after MovieDAOIMPL line 76");
-		
+
 		Model.addAttribute("movies", movies);
-		
-		
 		System.out.println("after setting the model attribute before returning the list line 79");
-		
 		return "listmovies";
 	}
 
-	@GetMapping("/showForm")
+	// @GetMapping("/showForm")
+	@RequestMapping("/")
 	public String showFormForAdd(Model Model) {
 		System.out.println(" inside Admin Controller inside showForm method");
-		/*Movie movie=new Movie();
-		Model.addAttribute("movie", movie);*/
-		Model.addAttribute("movie", new Movie());
+		/*
+		 * Movie movie=new Movie(); Model.addAttribute("movie", movie);
+		 */// line number 71 and 72 declaration are equal to line 73
+		// Model.addAttribute("movie", new Movie());
+		// Model.addAttribute("showmovie", new ShowMovie());
 
+		Model.addAttribute("movie", new CompositeModelDto());
+		Model.addAttribute("showmovie", new CompositeModelDto());
+		Model.addAttribute("movieDto", new CompositeModelDto());
 		return "admin-home";
 	}
 
-	//@RequestMapping(value = "/saveMovie", method = RequestMethod.POST)
-	
+	// @RequestMapping(value = "/saveMovie", method = RequestMethod.POST)
+
 	@PostMapping("/saveMovie")
-	public String saveMovie(@ModelAttribute("movie") Movie movie,Model model)  throws IOException{
+	public String saveMovie( @ModelAttribute("movie") Movie movie,@ModelAttribute("showmovie") ShowMovie
+							 showmovie,
+			@ModelAttribute("movieDto") CompositeModelDto movieDto, Model model) {
 
-		System.out.println(" inside Admin Controller inside SaveMovie method before values inserted line 88");
+		System.out.println(" inside Admin Controller inside SaveMovie method before values inserted line 84");
+
+	
+		System.out.println("Movie name =" + movieDto.getMovie().getName());
+		System.out.println("Movie Duration =" + movieDto.getMovie().getDuration());
+		System.out.println("Actor's names =" + movieDto.getMovie().getCast_names());
+		System.out.println("Movie Start Date =" + movieDto.getMovie().getMovieStartDate());
+		System.out.println("Movie  End Date =" + movieDto.getMovie().getMovieEndDate());
+		System.out.println("Ticket Price=" + movieDto.getMovie().getPrice());
+		System.out.println("Movie Language =" + movieDto.getShowmovie().getLanguage());
+		System.out.println("Show Time =" + movieDto.getShowmovie().getShow_Time());
+		System.out.println("Start Time =" + movieDto.getShowmovie().getStart_Time());
+		System.out.println("Movie Image =" + movieDto.getMovie().getImage());
+	
+
+		System.out.println(" inside Admin Controller inside SaveMovie method before values inserted line 99");
+
+		movieDaoImpl.saveMovie(movieDto.getMovie(),movieDto.getShowmovie());
 		
+		System.out.println(" inside Admin Controller inside SaveMovie method After values inserted line 103");
+		
+		return null;
 
-		model.addAttribute("myfile", movie.getImage());
-		movieDaoImpl.saveMovie(movie);
-		System.out.println("Image =" + movie.getImage());
-		/*model.addAttribute("name", movie.getName());
-		model.addAttribute("language", movie.getLanguage());
-		model.addAttribute("duration", movie.getDuration());
-		model.addAttribute("castname", movie.getCast_names());
-		*/
-		//System.out.println(" inside Admin Controller inside SaveMovie method before values inserted line 109");
-
-		/*System.out.println("name =" + movie.getName());
-		System.out.println("Language =" + movie.getLanguage());
-		System.out.println("Duration =" + movie.getDuration());
-		System.out.println("Cast's Names =" + movie.getCast_names());
-		*/
-
-		return "redirect:/movie/Listmovies";
+		// return "redirect:/movie/Listmovies";
 	}
-	
-	
-	
+
 	@GetMapping("/updateMovie")
-	//@PutMapping("/{movieId}")
-	//public String showFormForUpdate(@PathVariable(value = "movieId") int movie_id,@Valid @RequestBody Movie movie, Model Model)
-	public String showFormForUpdate(@RequestParam("movieId") int movie_id, Model Model)
-		{
+	// @PutMapping("/{movieId}")
+	// public String showFormForUpdate(@PathVariable(value = "movieId") int
+	// movie_id,@Valid @RequestBody Movie movie, Model Model)
+	public String showFormForUpdate(@RequestParam("movieId") int movie_id, Model Model) {
 		System.out.println(" inside Admin Controller inside updateMovie method");
-		
+
 		Movie movies = movieDaoImpl.getMovie(movie_id);
-		
-		
-		 movies.setMovieStartDate(new Date()); 
-		  movies.setMovieEndDate(new Date()); 
+
+		movies.setMovieStartDate(new Date());
+		movies.setMovieEndDate(new Date());
 		Model.addAttribute("movie", movies);
-		
-		/*movies.setImage(movies.getImage());
-		movies.setName(movies.getName());
-		movies.setLanguage(movies.getLanguage());
-		movies.setDuration(movies.getDuration());
-		movies.setCast_names(movies.getCast_names());*/
-		 //movies = movieDaoImpl.getMovie(movie_id);
-		
+
+		/*
+		 * movies.setImage(movies.getImage()); movies.setName(movies.getName());
+		 * movies.setLanguage(movies.getLanguage());
+		 * movies.setDuration(movies.getDuration());
+		 * movies.setCast_names(movies.getCast_names());
+		 */
+		// movies = movieDaoImpl.getMovie(movie_id);
+
 		return "admin-home";
 	}
 
@@ -134,18 +138,6 @@ public class AdminController {
 		movieDaoImpl.deleteMovie(movie_id);
 		return "redirect:/movie/Listmovies";
 	}
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	/*
 	 * @RequestMapping(value = "/admin/upload", method = RequestMethod.POST) public
