@@ -17,38 +17,52 @@ public class Seats {
 	private int id;
 	
 	@Column(name = "seat_number")
-	private int seat_number;
+	private int SeatNumber;
 	
-	
+	@Column(name = "seat_status")
+	private boolean SeatStatus;
 
-
-
-	public int getSeat_no() {
-		return seat_number;
-	}
-
-	public void setSeat_no(int seat_no) {
-		this.seat_number = seat_no;
-	}
-
-	public int getSeat_id() {
+	public int getId() {
 		return id;
 	}
 
-	public void setSeat_id(int seat_id) {
-		this.id = seat_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public Seats(int seat_no, int seat_id) {
-		super();
-		
-		this.seat_number = seat_no;
-		this.id = seat_id;
+	public int getSeatNumber() {
+		return SeatNumber;
+	}
+
+	public void setSeatNumber(int seatNumber) {
+		SeatNumber = seatNumber;
+	}
+
+	public boolean isSeatStatus() {
+		return SeatStatus;
+	}
+
+	public void setSeatStatus(boolean seatStatus) {
+		SeatStatus = seatStatus;
 	}
 
 	public Seats() {
 		
 	}
+
+	public Seats(int id, int seatNumber, boolean seatStatus) {
 	
+		this.id = id;
+		SeatNumber = seatNumber;
+		SeatStatus = seatStatus;
+	}
+
+	@Override
+	public String toString() {
+		return "Seats [id=" + id + ", SeatNumber=" + SeatNumber + ", SeatStatus=" + SeatStatus + "]";
+	}
+	
+	
+
 
 }

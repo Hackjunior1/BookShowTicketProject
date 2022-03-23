@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head><%@ page isELIgnored="false"%>
@@ -25,54 +25,25 @@
 				<div class="panel-body">
 					<table class="table table-striped table-bordered">
 						<tr>
-							<th>Image</th>
-							<th>Movie Name</th>
-							<th>Language</th>
-							<th>Duration</th>
-							<th>Actors</th>
-							<th>Start Date</th>
-							<th>End Date</th>
+							<th>BookingId</th>
+							<th>MovieId</th>
+							<th>ShowDate</th>
+							<th>ShowTime</th>
+							<th>SeatNumber</th>
 						</tr>
 
 						<!-- loop over and print our customers -->
-						<c:forEach var="Movies" items="${movies}">
-
-							<!-- construct an "update" link with customer id -->
-							<c:url var="updateLink" value="updateMovie">
-								<c:param name="movieId" value="${Movies.id}" />
-							</c:url>
-
-							<!-- construct an "delete" link with customer id -->
-							<c:url var="deleteLink" value="/delete">
-								<c:param name="movieId" value="${Movies.id}" />
-							</c:url>
-
-							<tr>
-								<td><img src='<c:out value="data:image/jpg;base64,${Movies.base64Image}"></c:out>' width="100" height="100" alt=" movie Image"/> 
-								<%--usage of <img> int <c:out>,https://stackoverflow.com/questions/30150266/how-to-use-jsp-cout-tag-to-set-src-of-html-img-tag
-								link to use <c:out> tag inside <img> --%></td>
-								<td>${Movies.name}</td>
-								<td>${Movies.language}</td>
-								<td>${Movies.duration}</td>
-								<td>${Movies.details}</td>
-
-								<td>${Movies.movieStartDate}</td>
-
-								<td>${Movies.movieEndDate}</td>
-
-								<td>
-									<!-- display the update link --> <a href="${updateLink}">Update</a>
-
-									|<a href="${deleteLink}"
-									onclick="if (!(confirm('Are you sure you want to delete this Movie?'))) return false">Delete</a>
-								</td>
-
+						<c:forEach var="Bookings" items="${bookings}">
+							<tr>							
+								<td>${Bookings.bookingId}</td>
+								<td>${Bookings.movieId}</td>
+								<td>${Bookings.showDate}</td>
+								<td>${Bookings.showTime}</td>
+								<td>${Bookings.seatNumber}</td>
+																
 							</tr>
-
 						</c:forEach>
-
 					</table>
-
 				</div>
 			</div>
 		</div>

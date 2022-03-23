@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -116,8 +117,8 @@ body {
 	width: 250px;
 	height: 25px;
 	padding: 8px 6px 4px 8px; /* padding values= top right bottom left.*/
-	font : normal 14px Myriad Pro, Verdana, Geneva, sans-serif; color :
-	white;
+	font: normal 14px Myriad Pro, Verdana, Geneva, sans-serif;
+	color: white;
 	margin-top: 2px;
 	background: green;
 	font: normal 14px Myriad Pro, Verdana, Geneva, sans-serif;
@@ -162,94 +163,90 @@ body {
 	</div>
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<a href="#">Add Movies</a> <a href="#">Remove Movie</a>
+		<a href="showForm">Add Movies</a> <a href="#">Remove Movie</a>
 
 	</div>
-	
+
 	<div align="center">
-		<form:form modelAttribute="movieDto" method="POST" action="saveMovie">
-			<!-- need to associate this data with customer id 
-			-->
+		<form:form modelAttribute="movie" method="POST" action="saveMovie">
+			<!-- need to associate this data with customer id -->
+
 			<div class="form-group">
 				<label class="col-md-3 control-label">Movie Name</label>
 				<div class="">
-					<form:input path="movie.name" placeholder="Movie Name..." />
-				</div>
-			 </div>
-			<div class="form-group">
-				<label class="col-md-3 control-label">Duration</label>
-				<div class="">
-					<form:input path="movie.duration" placeholder="Movie Duration..." />
+					<form:input path="name" placeholder="Movie Name..." />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="" class="col-md-3 control-label">Actor's Names</label>
+				<label class="col-md-3 control-label">Duration</label>
 				<div class="">
-					<form:input path="movie.cast_names" placeholder="Actor's Names..." />
+					<form:input path="duration" placeholder="Movie Duration..." />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-md-3 control-label">Movie Details</label>
+				<div class="">
+					<form:input path="Details" placeholder="Actor's Names..." />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="" class="col-md-3 control-label">Movie Start
 					Date</label>
 				<div class="">
-					<form:input path="movie.MovieStartDate"	placeholder="Enter show starting date" />
+					<form:input path="MovieStartDate"
+						placeholder="Enter show starting date" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="" class="col-md-3 control-label">Movie End Date</label>
 				<div class="">
-					<form:input path="movie.MovieEndDate" placeholder="Enter show End date" />
+					<form:input path="MovieEndDate" placeholder="Enter show End date" />
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label for="" class="col-md-3 control-label">Ticket Price</label>
 				<div class="">
-					<form:input path="movie.price" placeholder="Enter Ticket Price" />
+					<form:input path="price" placeholder="Enter Ticket Price" />
 				</div>
 			</div>
+
+
+			<div class="form-group">
+				<label class="col-md-3 control-label">Language</label>
+				<div class="">
+					<form:input path="language" placeholder="Movie Language..." />
+				</div>
+			</div>
+			<br/>
+			<div class="form-group">
 			
+				<form:checkbox path="Show11to2" value="yes"/>
+				<label>Morning Show</label>
 				
-					<div class="form-group">
-						<label class="col-md-3 control-label">Language</label>
-						<div class="">
-							<form:input path="showmovie.language" placeholder="Movie Language..." />
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="" class="col-md-3 control-label">Show Time</label>
-						<div class="">
-							<form:input path="showmovie.Show_Time" placeholder="Enter Show Timing" />
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label for="" class="col-md-3 control-label">Show Start
-							Time</label>
-						<div class="">
-							<form:input path="showmovie.Start_Time" placeholder="Enter Show Start Time" />
-						</div>
-					</div>
-				 
-
-
+				<form:checkbox path="Show2to5" value="yes"/>
+				<label>Matinee  Show</label>
+				
+				<form:checkbox path="Shwo6to8" value="yes"/>	
+				<label>First Show</label>
+				
+				<form:checkbox path="Show9to12" value="yes"/>
+				<label>Second Show</label>		
+			</div>
+			<br/>
 			<div class="choose_file">
-				<span>Select Image </span> 
-				<input name="Select File" type="file" path="movie.image" />
+				<span>Select Image </span>
+				<form:input type="file" value="image" path="image" />
 			</div>
 
 			<div class="form-group">
 				<!-- Button -->
 				<div class="col-md-offset-3 col-md-9">
-					<%-- <form:button cssClass="btn btn-primary">Submit</form:button> --%>
-					<input type="submit" value="submit"/>
+
+					<input type="submit" value="submit" />
 				</div>
 			</div>
 		</form:form>
 	</div>
-
-	
-	
-	</body>
+</body>
 </html>
